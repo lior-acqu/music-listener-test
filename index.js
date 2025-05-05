@@ -18,14 +18,14 @@ const questionTexts = [
   "I love music that gets my heart racing.",
   "I like long songs because they give space for emotion and detail.",
   "I love when music has rich layers and depth.",
-  "Music that makes me smile are my go-to.",
+  "Music that makes me smile is my go-to.",
   "Most of my favourite musicians are singers.",
   "I like it when music has many different elements playing together.",
   "I listen to music to calm me down.",
   "My music taste is all over the place. I love listening to a wild mix of music.",
   "I connect more with voices than instruments.",
   "I like listening to longer music.",
-  "Soft, delicate music moves me more than loud music.",
+  "Soft, delicate music moves me more than highly energetic music.",
   "Most of the music I love comes from a few specific artists.",
   "I have a genre that is clearly my favourite.",
   "If it doesn’t lift my mood, I usually skip it.",
@@ -35,9 +35,9 @@ const questionTexts = [
   "I like listening to music that makes me happy.",
   "I like catchy music that is easy to follow.",
   "I love music even without vocals.",
-  "I turn to music for a little boost.",
+  "I often turn on music for a little boost.",
   "I often explore new kinds of music.",
-  "Too much going on in a song overwhelms me.",
+  "A lot going on in a song makes it less enjoyable.",
   "I like knowing what to expect when I put on music.",
   "Instrumentals give me more freedom to feel.",
   "I like soothing, soft music.",
@@ -56,80 +56,59 @@ const questionTexts = [
   "I like music that takes time to build and unfold.",
 ];
 
-var userProfile = {
-  variety: 0,
-  complexity: 0,
-  valence: 0,
-  energy: 0,
-  duration: 0,
-  speechiness: 0,
-};
+var userProfile = [0, 0, 0, 0, 0, 0];
 
 const questionImpacts = [
-  { energy: 1, valence: 0.5 },
-  { variety: 1 },
-  { energy: 1 },
-  { duration: 1, valence: -0.25, complexity: 0.25 },
-  { complexity: 1 },
-  { valence: 1 },
-  { speechiness: 1 },
-  { complexity: 1 },
-  { valence: -1 },
-  { variety: 1 },
-  { speechiness: 1 },
-  { duration: 1 },
-  { valence: -1 },
-  { variety: -1 },
-  { variety: -1 },
-  { valence: 1 },
-  { duration: -1 },
-  { complexity: 1 },
-  { valence: -1 },
-  { valence: 1 },
-  { complexity: -1, valence: 0.25 },
-  { speechiness: -1 },
-  { energy: 1, valence: 0.25 },
-  { variety: 1 },
-  { complexity: 1 },
-  { variety: -1, complexity: -0.5 },
-  { valence: -0.5, speechiness: -1 },
-  { energy: -1 },
-  { speechiness: 1 },
-  { duration: -1, complexity: -0.5 },
-  { complexity: 1, energy: 0.25 },
-  { valence: -1 },
-  { energy: -1, valence: -0.5 },
-  { variety: -1 },
-  { variety: -0.75, complexity: -1 },
-  { speechiness: -1 },
-  { complexity: -1 },
-  { valence: -1 },
-  { duration: -1 },
-  { variety: 1 },
-  { duration: 1, complexity: 0.25 },
+  [0, 0, 2, 4, 0, 0],
+  [4, 0, 0, 0, 0, 0],
+  [0, 0, 0, 4, 0, 0],
+  [0, 1, -1, 0, 4, 0],
+  [0, 4, 0, 0, 0, 0],
+  [0, 0, 4, 0, 0, 0],
+  [0, 0, 0, 0, 0, 4],
+  [0, 4, 0, 0, 0, 0],
+  [0, 0, -4, 0, 0, 0],
+  [4, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 4],
+  [0, 0, 0, 0, 4, 0],
+  [0, 0, -4, 0, 0, 0],
+  [-4, 0, 0, 0, 0, 0],
+  [-4, 0, 0, 0, 0, 0],
+  [0, 0, 4, 0, 0, 0],
+  [0, 0, 0, 0, -4, 0],
+  [0, 4, 0, 0, 0, 0],
+  [0, 0, -4, 0, 0, 0],
+  [0, 0, 4, 0, 0, 0],
+  [0, -4, 1, 0, 0, 0],
+  [0, 0, 0, 0, 0, -4],
+  [0, 0, 1, 4, 0, 0],
+  [4, 0, 0, 0, 0, 0],
+  [0, 4, 0, 0, 0, 0],
+  [-4, -2, 0, 0, 0, 0],
+  [0, 0, -2, 0, 0, -4],
+  [0, 0, 0, -4, 0, 0],
+  [0, 0, 0, 0, 0, 4],
+  [0, -2, 0, 0, -4, 0],
+  [0, 4, 0, 1, 0, 0],
+  [0, 0, -4, 0, 0, 0],
+  [0, 0, -2, -4, 0, 0],
+  [-4, 0, 0, 0, 0, 0],
+  [-3, -4, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, -4],
+  [0, -4, 0, 0, 0, 0],
+  [0, 0, -4, 0, 0, 0],
+  [0, 0, 0, 0, -4, 0],
+  [4, 0, 0, 0, 0, 0],
+  [0, 1, 0, 0, 4, 0],
 ];
 
-// current maxs
-const maxEnergy = 15.75;
-const maxValence = 30.25;
-const maxVariety = 26.25;
-const maxSpeech = 18;
-const maxComplex = 28.5;
-const maxDuration = 18;
+const maxValues = [63, 123, 105, 72, 114, 72];
 
-const answerTexts = [
-  "Totally Disagree",
-  "Disagree",
-  "Sort of Disagree",
-  "Neutral",
-  "Sort of Agree",
-  "Agree",
-  "Totally Agree",
-];
+const answerTexts = ["-", "", "", "0", "", "", "+"];
 
 var selectedButtons = [
   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 ];
 
 function generateQuestions() {
@@ -139,94 +118,58 @@ function generateQuestions() {
     const answerBox = document.createElement("div");
     answerBox.classList.add("options");
     for (let j = 0; j < 7; j++) {
-      answerBox.innerHTML +=
-        '<button id="' +
-        (j - 3) +
-        "-" +
-        i +
-        '" onclick="chooseButton(' +
-        (j - 3) +
-        "," +
-        i +
-        ')">' +
-        answerTexts[j] +
-        "</button>";
+      if (j == 6) {
+        answerBox.innerHTML +=
+          '<button class="test-button" style="border-right: 1px solid #15294f" id="' +
+          (j - 3) +
+          "-" +
+          i +
+          '" onclick="chooseButton(' +
+          (j - 3) +
+          "," +
+          i +
+          ')">' +
+          answerTexts[j] +
+          "</button>";
+      } else {
+        answerBox.innerHTML +=
+          '<button class="test-button" id="' +
+          (j - 3) +
+          "-" +
+          i +
+          '" onclick="chooseButton(' +
+          (j - 3) +
+          "," +
+          i +
+          ')">' +
+          answerTexts[j] +
+          "</button>";
+      }
     }
     document.querySelector("body").appendChild(answerBox);
   }
   document.querySelector("body").innerHTML +=
-    "<button onclick='evaluateScore()'>Done</button>";
+    "<button class='submit-btn' onclick='evaluateScore()'>Done</button>";
 }
 function evaluateScore() {
-  var musicMBTI = [];
+  var musicMBTI = ["", "", "", "", "", "", ""];
+  var percentages = [0, 0, 0, 0, 0, 0];
   for (let i = 0; i < questionImpacts.length; i++) {
-    for (let key in questionImpacts[i]) {
-      if (userProfile.hasOwnProperty(key)) {
-        userProfile[key] += questionImpacts[i][key] * selectedButtons[i];
-      }
-
-      if (key == "variety") {
-        if (userProfile[key] > 0) {
-          musicMBTI[0] =
-            "D" + Math.round((userProfile[key] / maxValence) * 50) + 50;
-        } else {
-          musicMBTI[0] =
-            "S" + Math.round((userProfile[key] / maxValence) * 50) + 50;
-        }
-      }
-
-      if (key == "complexity") {
-        if (userProfile[key] > 0) {
-          musicMBTI[1] =
-            "C" + Math.round((userProfile[key] / maxValence) * 50) + 50;
-        } else {
-          musicMBTI[1] =
-            "F" + Math.round((userProfile[key] / maxValence) * 50) + 50;
-        }
-      }
-
-      if (key == "valence") {
-        if (userProfile[key] > 0) {
-          musicMBTI[2] =
-            "P" + Math.round((userProfile[key] / maxValence) * 50) + 50;
-        } else {
-          musicMBTI[2] =
-            "M" + Math.round((userProfile[key] / maxValence) * 50) + 50;
-        }
-      }
-
-      if (key == "energy") {
-        if (userProfile[key] > 0) {
-          musicMBTI[3] =
-            "I" + Math.round((userProfile[key] / maxValence) * 50) + 50;
-        } else {
-          musicMBTI[3] =
-            "G" + Math.round((userProfile[key] / maxValence) * 50) + 50;
-        }
-      }
-
-      if (key == "duration") {
-        if (userProfile[key] > 0) {
-          musicMBTI[4] =
-            "-L" + Math.round((userProfile[key] / maxValence) * 50) + 50;
-        } else {
-          musicMBTI[4] =
-            "-S" + Math.round((userProfile[key] / maxValence) * 50) + 50;
-        }
-      }
-
-      if (key == "speechiness") {
-        if (userProfile[key] > 0) {
-          musicMBTI[5] =
-            "V" + Math.round((userProfile[key] / maxValence) * 50) + 50;
-        } else {
-          musicMBTI[5] =
-            "I" + Math.round((userProfile[key] / maxValence) * 50) + 50;
-        }
-      }
+    for (let j = 0; j < questionImpacts[i].length; j++) {
+      userProfile[j] += questionImpacts[i][j] * selectedButtons[i];
+      console.log(userProfile[j], questionImpacts[i][j], selectedButtons[i]);
     }
   }
-  console.log(musicMBTI.join(""));
+  for (let k = 0; k < userProfile.length; k++) {
+    percentages[k] = Math.ceil((userProfile[k] / maxValues[k]) * 50) + 50;
+    //  if (userProfile[k] > 0) {
+    //    musicMBTI[0] = "D";
+    //  } else {
+    //    musicMBTI[0] = "S";
+    //  }
+    //}
+  }
+  console.log(percentages);
 }
 
 function chooseButton(number, question) {
@@ -234,11 +177,11 @@ function chooseButton(number, question) {
   for (i = -3; i < 4; i++) {
     document.getElementById(
       i.toString() + "-" + question.toString()
-    ).style.border = "none";
+    ).style.backgroundColor = "#ece4da";
   }
   document.getElementById(
     number.toString() + "-" + question.toString()
-  ).style.border = "2px blue solid";
+  ).style.backgroundColor = "#888cb2";
   console.log(selectedButtons);
 }
 
