@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import sqlite3
 
 try:
@@ -10,11 +10,13 @@ except sqlite3.Error as error:
 
 
 
-
-print(sqlite3.sqlite_version)
-
 app = Flask(__name__)
 
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 def home():
-    return render_template("index.html")
+    if request.method == "GET":
+        return render_template("index.html")
+    else:
+        type = request.form.get("musical-type")
+        percentages = request.form.get("percentages")
+        return f"Hello, {type}, these are your percentages: {percentages}"

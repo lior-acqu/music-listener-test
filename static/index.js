@@ -113,7 +113,7 @@ var selectedButtons = [
 
 function generateQuestions() {
   for (let i = 0; i < questionTexts.length; i++) {
-    document.querySelector("body").innerHTML +=
+    document.querySelector(".questions-container").innerHTML +=
       "<p class='question'>" + questionTexts[i] + "</p>";
     const answerBox = document.createElement("div");
     answerBox.classList.add("options");
@@ -146,34 +146,46 @@ function generateQuestions() {
           "</button>";
       }
     }
-    document.querySelector("body").appendChild(answerBox);
+    document.querySelector(".questions-container").appendChild(answerBox);
   }
-  document.querySelector("body").innerHTML +=
-    "<button class='submit-btn' onclick='evaluateScore()'>Done</button>";
 }
 function evaluateScore() {
-  var musicMBTI = ["", "", "", "", "", "", ""];
+  var musicMBTI = ["S", "F", "M", "G", "-S", "I"];
+  var userProfile = [0, 0, 0, 0, 0, 0];
   var percentages = [0, 0, 0, 0, 0, 0];
   for (let i = 0; i < questionImpacts.length; i++) {
     for (let j = 0; j < questionImpacts[i].length; j++) {
       userProfile[j] += questionImpacts[i][j] * selectedButtons[i];
-      console.log(userProfile[j], questionImpacts[i][j], selectedButtons[i]);
     }
   }
   for (let k = 0; k < userProfile.length; k++) {
     percentages[k] = Math.ceil((userProfile[k] / maxValues[k]) * 50) + 50;
-    //  if (userProfile[k] > 0) {
-    //    musicMBTI[0] = "D";
-    //  } else {
-    //    musicMBTI[0] = "S";
-    //  }
-    //}
   }
-  console.log(percentages);
+  if (percentages[0] > 50) {
+    musicMBTI[0] = "D";
+  }
+  if (percentages[1] > 50) {
+    musicMBTI[1] = "C";
+  }
+  if (percentages[2] > 50) {
+    musicMBTI[2] = "P";
+  }
+  if (percentages[3] > 50) {
+    musicMBTI[3] = "I";
+  }
+  if (percentages[4] > 50) {
+    musicMBTI[4] = "-L";
+  }
+  if (percentages[5] > 50) {
+    musicMBTI[5] = "V";
+  }
+  document.getElementById("percentages").value = percentages.join(",");
+  document.getElementById("musical-type").value = musicMBTI.join("");
 }
 
 function chooseButton(number, question) {
   selectedButtons[question] = number;
+  evaluateScore();
   for (i = -3; i < 4; i++) {
     document.getElementById(
       i.toString() + "-" + question.toString()
@@ -182,7 +194,6 @@ function chooseButton(number, question) {
   document.getElementById(
     number.toString() + "-" + question.toString()
   ).style.backgroundColor = "#888cb2";
-  console.log(selectedButtons);
 }
 
 generateQuestions();
