@@ -102,7 +102,7 @@ const questionImpacts = [
   [0, 1, 0, 0, 4, 0],
 ];
 
-const maxValues = [63, 123, 105, 72, 114, 72];
+const maxValues = [93, 123, 105, 72, 114, 72];
 
 const answerTexts = ["-", "", "", "0", "", "", "+"];
 
@@ -197,3 +197,4 @@ function chooseButton(number, question) {
 }
 
 generateQuestions();
+evaluateScore();

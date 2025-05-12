@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Musical Type Test</title>
+</head>
+<body class="{{ group.lower() }}">
+    <p class="result light">You Are a {{ type }} ({{name}})</p>
+    <p class="res-information light">{{ description }}</p>
+    <h2 class="sub-title light">You Are One of the {{ group }}</h2>
+    <p class="res-information light">{{ name }}{{ group_description }}</p>
+
+    <a href="../static/SCPI.png" class="light" download>Share your Type</a>
+
+    <h2 class="sub-title light">Your Music Taste's Variety</h2>
+    <div class="information-flex">
+        <p class="res-information light">Selective</p>
+        <p class="res-information light" style="font-size: 28px;">{{ percentages[0] }}%</p>
+        <p class="res-information light">Diversified</p>
+    </div>
+    <div class="bar-container">
+        <div class="bg-bar"></div>
+        <div class="filled-bar" id="bar0"></div>
+    </div>
+    <p class="res-information light">{{ variety }}</p>
+
+    <h2 class="sub-title light">Your Music Taste's Complexity</h2>
+    <div class="information-flex">
+        <p class="res-information light">Flowy</p>
+        <p class="res-information light" style="font-size: 28px;">{{ percentages[1] }}%</p>
+        <p class="res-information light">Complex</p>
+    </div>
+    <div class="bar-container">
+        <div class="bg-bar"></div>
+        <div class="filled-bar" id="bar1"></div>
+    </div>
+    <p class="res-information light">{{ complexity }}</p>
+
+    <h2 class="sub-title light">Your Music Taste's Valence</h2>
+    <div class="information-flex">
+        <p class="res-information light">Melancholic</p>
+        <p class="res-information light" style="font-size: 28px;">{{ percentages[2] }}%</p>
+        <p class="res-information light">Positive</p>
+    </div>
+    <div class="bar-container">
+        <div class="bg-bar"></div>
+        <div class="filled-bar" id="bar2"></div>
+    </div>
+    <p class="res-information light">{{ valence }}</p>
+
+    <h2 class="sub-title light">Your Music Taste's Energy</h2>
+    <div class="information-flex">
+        <p class="res-information light">Gentle</p>
+        <p class="res-information light" style="font-size: 28px;">{{ percentages[3] }}%</p>
+        <p class="res-information light">Intense</p>
+    </div>
+    <div class="bar-container">
+        <div class="bg-bar"></div>
+        <div class="filled-bar" id="bar3"></div>
+    </div>
+    <p class="res-information light">{{ energy }}</p>
+    <h2 class="result light" style="padding-top: 30px; border-top: 1px solid; width: 85%; max-width: 800px; margin-bottom: -30px;">Additional Metrics</h2>
+    <h2 class="sub-title light">Your Music Taste's Preferred Song Duration</h2>
+    <div class="information-flex">
+        <p class="res-information light">Short</p>
+        <p class="res-information light" style="font-size: 28px;">{{ percentages[4] }}%</p>
+        <p class="res-information light">Long</p>
+    </div>
+    <div class="bar-container">
+        <div class="bg-bar"></div>
+        <div class="filled-bar" id="bar4"></div>
+    </div>
+    <p class="res-information light">{{ duration }}</p>
+
+    <h2 class="sub-title light">Your Music Taste's Speechiness</h2>
+    <div class="information-flex">
+        <p class="res-information light">Instrumental</p>
+        <p class="res-information light" style="font-size: 28px;">{{ percentages[5] }}%</p>
+        <p class="res-information light">Vocal</p>
+    </div>
+    <div class="bar-container">
+        <div class="bg-bar"></div>
+        <div class="filled-bar" id="bar5"></div>
+    </div>
+    <p class="res-information light">{{ speechiness }}</p>
+
+   
+    <script>
+        document.getElementById("bar0").style.width = {{percentages[0]}} + "%";
+        document.getElementById("bar1").style.width = {{percentages[1]}} + "%";
+        document.getElementById("bar2").style.width = {{percentages[2]}} + "%";
+        document.getElementById("bar3").style.width = {{percentages[3]}} + "%";
+        document.getElementById("bar4").style.width = {{percentages[4]}} + "%";
+        document.getElementById("bar5").style.width = {{percentages[5]}} + "%";
+    </script>
+</body>
+</html>
