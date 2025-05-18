@@ -102,6 +102,40 @@ const questionImpacts = [
   [0, 1, 0, 0, 4, 0],
 ];
 
+const genreProposals = [
+  "Classical",
+  "Medieval",
+  "Choral",
+  "Experimental",
+  "Contemporary Classical",
+  "Lo-fi",
+  "Blues",
+  "Country",
+  "Chill-out",
+  "Background",
+  "Ambient",
+  "EDM",
+  "Wave",
+  "Rock",
+  "Disco",
+  "Funk",
+  "Metal",
+  "Hip Hop",
+  "Rap",
+  "Phonk",
+  "House",
+  "Reggae",
+  "Cinematic",
+  "Indie",
+  "Jazz",
+  "Pop",
+  "Schlager",
+  "Dance",
+  "Punk",
+  "Traditional",
+  "Yodeling",
+];
+
 const maxValues = [93, 123, 105, 72, 114, 72];
 
 const answerTexts = ["-", "", "", "0", "", "", "+"];
@@ -194,6 +228,32 @@ function chooseButton(number, question) {
   document.getElementById(
     number.toString() + "-" + question.toString()
   ).style.backgroundColor = "#888cb2";
+}
+
+function showPropositions() {
+  document.querySelector(".propositions-container").innerHTML = "";
+  input = document.getElementById("fav-genre").value;
+  propList = [];
+  for (let i = 0; i < genreProposals.length; i++) {
+    if (
+      genreProposals[i].toLowerCase().includes(input.toLowerCase()) &&
+      propList.length < 7
+    ) {
+      propList.push(genreProposals[i]);
+    }
+  }
+  for (let j = 0; j < propList.length; j++) {
+    text = document.createTextNode(propList[j]);
+    option = document.createElement("button");
+    option.appendChild(text);
+    option.classList.add("propositions");
+    option.setAttribute("type", "button");
+    option.setAttribute(
+      "onclick",
+      `document.getElementById('fav-genre').value = '${propList[j]}'`
+    );
+    document.querySelector(".propositions-container").appendChild(option);
+  }
 }
 
 generateQuestions();

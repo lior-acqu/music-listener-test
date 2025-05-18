@@ -26,6 +26,13 @@ def home():
     else:
         type = request.form.get("musical-type")
         percentages = [int(x) for x in request.form.get("percentages").split(",")]
+        song = ""
+        if request.form.get("fav-song"):
+            song = request.form.get("fav-song")
+        genre = ""
+        if request.form.get("fav-genre"):
+            genre = request.form.get("fav-genre")
+        consent = request.form.get("database-entry")
         name = ""
         adjectives = ""
         description = ""
@@ -61,4 +68,24 @@ def home():
                 valence = json_of_types[i]["valence"]
         if not type_found:
             return f"Incorrect Type: {type[:4]}"
+        # add results to database
+        if consent != None:
+            try:
+                connection = sqlite3.connect("entries.db")
+                db = connection.cursor()
+                # differentiate between cases (depends on input)
+                if song == "" and genre == "":
+                    db.execute("INSERT INTO results(type,variety,complexity,valence,energy) VALUES (?,?,?,?,?)", (type, percentages[0], percentages[1], percentages[2], percentages[3]))
+                    connection.commit()
+                elif song == "":
+                    db.execute("INSERT INTO results(type,genre,variety,complexity,valence,energy) VALUES (?,?,?,?,?,?)", (type, genre, percentages[0], percentages[1], percentages[2], percentages[3]))
+                    connection.commit()
+                elif genre == "":
+                    db.execute("INSERT INTO results(type,song,variety,complexity,valence,energy) VALUES (?,?,?,?,?,?)", (type, song, percentages[0], percentages[1], percentages[2], percentages[3]))
+                    connection.commit()
+                else:
+                    db.execute("INSERT INTO results(type,song,genre,variety,complexity,valence,energy) VALUES (?,?,?,?,?,?,?)", (type, song, genre, percentages[0], percentages[1], percentages[2], percentages[3]))
+                    connection.commit()
+            except sqlite3.Error as error:
+                return f"Error: {error}"
         return render_template("result.html", type = type, colour = colour, name = name, adjectives = adjectives, description = description, group = group, variety = variety, group_description = group_description, complexity = complexity, valence = valence, energy = energy, percentages = percentages) #f"Hello, {type} - {name}, you are one of the {group}. This is your description: {description}, these are your adjectives: {adjectives}, these are your percentages: {percentages}"

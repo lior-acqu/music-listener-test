@@ -4,9 +4,17 @@
     <img src="../static/main_img.jpg" alt="music-decoration" class="title-img">
     <h1 class="title">THE MUSICAL TYPE TEST</h1>
     <div class="questions-container"></div>
+    <h2 class="sub-title" style="text-align: center;">Additional Questions</h2>
     <form action="/" method="post">
+        <input class="visible-ipt" type="text" name="fav-song" id="fav-song" placeholder="My Favourite Song">
+        <input class="visible-ipt" type="text" name="fav-genre" id="fav-genre" placeholder="My Favourite Genre (Below, you find some suggestions)" oninput="showPropositions()">
+        <div class="propositions-container"></div>
         <input type="hidden" name="percentages" id="percentages">
         <input type="hidden" name="musical-type" id="musical-type">
+        <div>
+            <p class="question">For me, it's ok if my musical type, favourite song, and my favourite genre are saved anonymously for the statistics.</p>
+            <input class="consent" type="checkbox" name="database-entry" id="database-entry">
+        </div>
         <button class='submit-btn' type="submit">Done</button>
     </form>
 {% endblock %}

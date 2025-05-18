@@ -194,6 +194,50 @@ td {
 .information-flex .res-information {
   text-align: center;
 }
+.visible-ipt {
+  width: 78.4vw;
+  max-width: 1050px;
+  height: 11.2vw;
+  max-height: 150px;
+  font-size: 24px;
+  border: 1px #15294f solid;
+  background-color: #ece4da;
+  color: #15294f;
+  margin-bottom: 10px;
+}
+.visible-ipt:focus {
+  outline: none;
+}
+.propositions-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.propositions {
+  height: 11vw;
+  width: 11vw;
+  max-width: 145px;
+  max-height: 145px;
+  border: #15294f 1px solid;
+  margin: 0.1vw;
+  background-color: #ece4da;
+}
+.propositions:hover {
+  background-color: #888cb2;
+}
+.consent {
+  margin: -40px 0 40px 0;
+  font-size: 300px;
+}
+input[type="checkbox"] {
+  transform: scale(2);
+}
+form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
 @media (max-width: 768px) {
   td {
     font-size: 16px;
