@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Musical Type Test</title>
+</head>
+<body class="{{ data.group.lower() }}">
+    <p class="result light">{{ data.type }} (The {{ data.name }})</p>
+    <p class="res-information light">{{ data.description }}</p>
+    <p class="big-information light">{{data.ratio}}% of all users are {{ data.name }}s</p>
+    <h2 class="sub-title light">{{ data.type }}s are {{ data.group }}</h2>
+    <p class="res-information light">{{ data.name }}{{ data.group_description }}</p>
+
+    <h2 class="sub-title light">Your Music Taste's Variety</h2>
+    <p class="res-information light">{{data.variety}}</p>
+
+    <h2 class="sub-title light">Your Music Taste's Complexity</h2>
+    <p class="res-information light">{{data.complexity}}</p>
+
+    <h2 class="sub-title light">Your Music Taste's Valence</h2>
+    <p class="res-information light">{{ data.valence }}</p>
+
+    <h2 class="sub-title light">Your Music Taste's Energy</h2>
+    <p class="res-information light">{{ data.energy }}</p>
+
+    <h2 class="sub-title light">Song Recommendations by {{ data.name }}s</h2>
+    <p class="res-information light" style="margin-bottom: 150px;">{{ data.songs }}</p>
+   
+    <script>
+        document.getElementById("bar0").style.width = ääpercentages[0]öö + "%";
+        document.getElementById("bar1").style.width = ääpercentages[1]öö + "%";
+        document.getElementById("bar2").style.width = ääpercentages[2]öö + "%";
+        document.getElementById("bar3").style.width = ääpercentages[3]öö + "%";
+        document.getElementById("bar4").style.width = ääpercentages[4]öö + "%";
+        document.getElementById("bar5").style.width = ääpercentages[5]öö + "%";
+    </script>
+</body>
+</html>
